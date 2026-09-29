@@ -1,0 +1,33 @@
+name: My First Workflow
+
+# 1. Define the Event: Run this workflow whenever code is pushed to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+
+# 2. Define the Jobs
+jobs:
+  say-hello:
+    # Specify the virtual machine runner (GitHub provides free Linux, Windows, and macOS runners)
+    runs-on: ubuntu-latest
+
+    # Define the steps that make up this job
+    steps:
+      # Step A: A pre-built action that downloads your repository code onto the runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step B: Run a simple bash command
+      - name: Print a greeting
+        run: |
+          echo "Hello from your GitHub Actions runner!"
+          echo "Current working directory:"
+          pwd
+
+      # Step C: Check system info (using bash commands you already know)
+      - name: Check environment
+        run: |
+          echo "OS Version:"
+          cat /etc/os-release
+          echo "Available disk space:"
+          df -h
